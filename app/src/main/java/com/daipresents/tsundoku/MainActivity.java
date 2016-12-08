@@ -8,16 +8,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daipresents.tsundoku.R;
-import com.daipresents.tsundoku.com.daipresents.tsundoku.booksapi.BookSearchAsyncLoader;
+import com.daipresents.tsundoku.com.daipresents.tsundoku.booksapi.BookSearchAdapter;
+import com.daipresents.tsundoku.com.daipresents.tsundoku.booksapi.BookSearchAsyncTaskLoader;
+import com.daipresents.tsundoku.com.daipresents.tsundoku.booksapi.BookSearchResultActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<JSONObject> {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     Activity activity;
@@ -38,41 +46,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     return;
                 }
 
-                searchBooks(textView.getText().toString());
+                String keyword = textView.getText().toString();
+                Log.v(TAG, "onCreate.onClick: keyword is " + keyword);
+
+                Intent intent = new Intent(MainActivity.this, BookSearchResultActivity.class);
+                intent.putExtra("keyword", keyword);
+                startActivity(intent);
             }
         });
-    }
-
-    void searchBooks(String keyword){
-        Log.v(TAG, "searchBooks: keyword is " + keyword);
-
-        Bundle bundle = new Bundle();
-        bundle.putString("keyword", keyword);
-
-        getLoaderManager().initLoader(0, bundle, this);
-
-        Intent intent = new Intent(MainActivity.this, BookListActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public Loader<JSONObject> onCreateLoader(int id, Bundle bundle) {
-        Log.v(TAG, "onCreateLoader: start");
-
-        BookSearchAsyncLoader loader = new BookSearchAsyncLoader(this, bundle.getString("url"));
-        loader.forceLoad();
-        return loader;
-    }
-
-    @Override
-    public void onLoadFinished(Loader<JSONObject> loader, JSONObject data) {
-        Log.v(TAG, "onLoadFinished: start");
-
-        Log.v(TAG, "onLoadFinished: JSON data is " + data.toString());
-    }
-
-    @Override
-    public void onLoaderReset(Loader<JSONObject> loader) {
-        Log.v(TAG, "onLoaderReset: start");
     }
 }

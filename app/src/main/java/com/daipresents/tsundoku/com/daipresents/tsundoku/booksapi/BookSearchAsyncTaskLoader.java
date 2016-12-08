@@ -9,7 +9,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -19,15 +18,15 @@ import java.net.URL;
 /**
  * Created by daipr on 2016/12/04.
  */
-public class BookSearchAsyncLoader extends AsyncTaskLoader<JSONObject> {
+public class BookSearchAsyncTaskLoader extends AsyncTaskLoader<JSONObject> {
 
-    private static final String TAG = BookSearchAsyncLoader.class.getSimpleName();
+    private static final String TAG = BookSearchAsyncTaskLoader.class.getSimpleName();
     private URL url;
 
-    public BookSearchAsyncLoader(Context context, String keyword) {
+    public BookSearchAsyncTaskLoader(Context context, String keyword) {
         super(context);
         try {
-            this.url = new java.net.URL("https://www.googleapis.com/books/v1/volumes?q=" + keyword);
+            this.url = new java.net.URL("https://www.googleapis.com/books/v1/volumes?startIndex=0&q=" + keyword);
         }catch (MalformedURLException e){
             e.printStackTrace();
         }
@@ -37,7 +36,7 @@ public class BookSearchAsyncLoader extends AsyncTaskLoader<JSONObject> {
     public JSONObject loadInBackground() {
 
         Log.v(TAG, "loadInBackground: start");
-
+        Log.v(TAG, "loadInBackground: API URL is " + this.url.toString());
         StringBuilder result = new StringBuilder();
         HttpURLConnection connection = null;
 

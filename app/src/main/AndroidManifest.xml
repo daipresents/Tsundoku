@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.daipresents.tsundoku.BookListActivity" />
-        <activity android:name="com.daipresents.tsundoku.SearchResultActivity" />
+        <activity android:name=".com.daipresents.tsundoku.booksapi.BookSearchResultActivity" />
         <activity android:name="com.daipresents.tsundoku.BookDetailActivity"></activity>
     </application>
 

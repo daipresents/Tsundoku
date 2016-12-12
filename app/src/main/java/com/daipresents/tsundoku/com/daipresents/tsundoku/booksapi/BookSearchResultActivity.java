@@ -28,6 +28,8 @@ public class BookSearchResultActivity extends AppCompatActivity implements Loade
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.v(TAG, "onCreate: start");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_search_result);
 
@@ -51,7 +53,7 @@ public class BookSearchResultActivity extends AppCompatActivity implements Loade
     public Loader<JSONObject> onCreateLoader(int id, Bundle bundle) {
         Log.v(TAG, "onCreateLoader: start");
 
-        BookSearchAsyncTaskLoader loader = new BookSearchAsyncTaskLoader(this, bundle.getString("url"));
+        BookSearchAsyncTaskLoader loader = new BookSearchAsyncTaskLoader(activity, bundle.getString("url"));
         loader.forceLoad();
         return loader;
     }
@@ -63,7 +65,7 @@ public class BookSearchResultActivity extends AppCompatActivity implements Loade
         Log.v(TAG, "onLoadFinished: JSON data is " + bookSearchData.toString());
 
         // convert json to list.
-        List bookList = new ArrayList<BookSearchResultItem>();
+        List bookList = new ArrayList<BookItem>();
         try {
             JSONArray items = bookSearchData.getJSONArray("items");
             for (int i = 0; i < items.length(); i++){
@@ -73,19 +75,25 @@ public class BookSearchResultActivity extends AppCompatActivity implements Loade
                 JSONObject volumeInfo = (JSONObject) item.getJSONObject("volumeInfo");
                 Log.v(TAG, "onLoadFinished: volumeInfo is " + volumeInfo.toString());
 
+                // Thumbnail
+                JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
+                String smallThumbnailURL = imageLinks.getString("smallThumbnail");
+                Log.v(TAG, "onLoadFinished: smallThumbnailURL is " + smallThumbnailURL);
+
+                // Title
                 String title = volumeInfo.getString("title");
                 Log.v(TAG, "onLoadFinished: title is " + title);
 
+                // Author
                 // TODO now only one author.
                 JSONArray authors = volumeInfo.getJSONArray("authors");
-                String author = authors.get(0).toString();
+                String author = "";
+                if (authors != null || authors.length() != 0) {
+                   author = authors.get(0).toString();
+                }
                 Log.v(TAG, "onLoadFinished: author is " + author);
 
-                JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
-                String smallThumbnail = imageLinks.getString("smallThumbnail");
-                Log.v(TAG, "onLoadFinished: smallThumbnail is " + author);
-
-                bookList.add(new BookSearchResultItem(title, author, smallThumbnail));
+                bookList.add(new BookItem(smallThumbnailURL, title, author));
             }
         } catch (JSONException e){
             e.printStackTrace();

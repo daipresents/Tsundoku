@@ -21,22 +21,31 @@ import java.net.URL;
 public class BookSearchAsyncTaskLoader extends AsyncTaskLoader<JSONObject> {
 
     private static final String TAG = BookSearchAsyncTaskLoader.class.getSimpleName();
+    private static final String GOOGLE_BOOK_API = "https://www.googleapis.com/books/v1/volumes?startIndex=0&q=";
     private URL url;
 
     public BookSearchAsyncTaskLoader(Context context, String keyword) {
         super(context);
+
+        Log.v(TAG, "BookSearchAsyncTaskLoader: request URL is " + GOOGLE_BOOK_API + keyword);
+
         try {
-            this.url = new java.net.URL("https://www.googleapis.com/books/v1/volumes?startIndex=0&q=" + keyword);
+            this.url = new java.net.URL(GOOGLE_BOOK_API + keyword);
         }catch (MalformedURLException e){
             e.printStackTrace();
         }
     }
 
+    /**
+     * Request to BOOK API by using keyword and get response as JSON object.
+     * @return
+     */
     @Override
     public JSONObject loadInBackground() {
 
         Log.v(TAG, "loadInBackground: start");
-        Log.v(TAG, "loadInBackground: API URL is " + this.url.toString());
+
+        JSONObject resultJSON = null;
         StringBuilder result = new StringBuilder();
         HttpURLConnection connection = null;
 
@@ -55,32 +64,30 @@ public class BookSearchAsyncTaskLoader extends AsyncTaskLoader<JSONObject> {
                     result.append(line);
                 }
                 reader.close();
+
+                String resultJSONString = result.toString();
+                Log.v(TAG, "loadInBackground: " + resultJSONString);
+
+                try {
+                    resultJSON =  new JSONObject(resultJSONString);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
-            return null;
         } catch (ProtocolException e) {
             e.printStackTrace();
-            return null;
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
         } finally {
             if (connection != null) {
                 connection.disconnect();
             }
         }
 
-        String resultJSONString = result.toString();
+        return resultJSON;
 
-        Log.v(TAG, "loadInBackground: " + resultJSONString);
-
-        try {
-            return new JSONObject(resultJSONString);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 }

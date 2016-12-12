@@ -1,6 +1,9 @@
 package com.daipresents.tsundoku.com.daipresents.tsundoku.booksapi;
 
 import android.content.Context;
+import android.content.Loader;
+import android.support.v4.content.res.ResourcesCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +13,16 @@ import android.widget.TextView;
 
 import com.daipresents.tsundoku.R;
 
-import android.net.Uri;
-import java.net.URISyntaxException;
 import java.util.List;
 
 /**
  * Created by daipr on 2016/12/07.
  */
 public class BookSearchAdapter
-        extends ArrayAdapter<BookSearchResultItem> {
+        extends ArrayAdapter<BookItem> {
 
+    private static final String TAG = BookSearchAdapter.class.getSimpleName();
+    private Context context;
     private LayoutInflater layoutInflater;
 
     static class ViewHolder {
@@ -28,13 +31,16 @@ public class BookSearchAdapter
         TextView author;
     }
 
-    public BookSearchAdapter(Context context, List<BookSearchResultItem> bookList) {
+    public BookSearchAdapter(Context context, List<BookItem> bookList) {
         super(context, 0, bookList);
+        this.context = context;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+        Log.v(TAG, "getView: start");
 
         View view = null;
         ViewHolder viewHolder = null;
@@ -51,10 +57,17 @@ public class BookSearchAdapter
             view = convertView;
         }
 
-        BookSearchResultItem item = (BookSearchResultItem) getItem(position);
+        BookItem item = (BookItem) getItem(position);
 
-        //viewHolder.smallThumbnail.setImageURI(new UR(item.getSmallThumbnail()));
+        // Image
+        // TODO 仮の画像
+        BookImageAsyncTask bookImageAsyncTask = new BookImageAsyncTask(context, viewHolder.smallThumnail);
+        bookImageAsyncTask.execute(item.getSmallThumbnail());
+
+        // Title
         viewHolder.title.setText(item.getTitle());
+
+        // Author
         viewHolder.author.setText(item.getAuthor());
 
         return view;

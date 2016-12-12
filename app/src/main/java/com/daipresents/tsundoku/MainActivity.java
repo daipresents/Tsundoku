@@ -1,29 +1,16 @@
 package com.daipresents.tsundoku;
 
 import android.app.Activity;
-import android.app.LoaderManager;
 import android.content.Intent;
-import android.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daipresents.tsundoku.com.daipresents.tsundoku.booksapi.BookSearchAdapter;
-import com.daipresents.tsundoku.com.daipresents.tsundoku.booksapi.BookSearchAsyncTaskLoader;
-import com.daipresents.tsundoku.com.daipresents.tsundoku.booksapi.BookSearchResultActivity;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.daipresents.tsundoku.com.daipresents.tsundoku.bookapi.BookSearchActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 String keyword = textView.getText().toString();
                 Log.v(TAG, "onCreate.onClick: keyword is " + keyword);
 
-                Intent intent = new Intent(MainActivity.this, BookSearchResultActivity.class);
+                Intent intent = new Intent(MainActivity.this, BookSearchActivity.class);
                 intent.putExtra("keyword", keyword);
                 startActivity(intent);
             }

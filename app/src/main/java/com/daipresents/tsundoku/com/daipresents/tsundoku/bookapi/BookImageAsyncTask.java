@@ -1,6 +1,5 @@
-package com.daipresents.tsundoku.com.daipresents.tsundoku.booksapi;
+package com.daipresents.tsundoku.com.daipresents.tsundoku.bookapi;
 
-import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,9 +9,7 @@ import android.widget.ImageView;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 
 /**

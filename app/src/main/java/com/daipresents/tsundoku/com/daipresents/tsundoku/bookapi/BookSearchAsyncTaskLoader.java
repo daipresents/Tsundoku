@@ -1,4 +1,4 @@
-package com.daipresents.tsundoku.com.daipresents.tsundoku.booksapi;
+package com.daipresents.tsundoku.com.daipresents.tsundoku.bookapi;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;

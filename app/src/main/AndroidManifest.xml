@@ -15,9 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.daipresents.tsundoku.BookListActivity" />
-        <activity android:name=".com.daipresents.tsundoku.booksapi.BookSearchResultActivity" />
-        <activity android:name="com.daipresents.tsundoku.BookDetailActivity"></activity>
+        <activity android:name=".com.daipresents.tsundoku.bookapi.BookSearchActivity" />
+        <activity android:name=".com.daipresents.tsundoku.bookapi.BookDetailActivity"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

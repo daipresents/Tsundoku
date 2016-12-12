@@ -1,4 +1,4 @@
-package com.daipresents.tsundoku.com.daipresents.tsundoku.booksapi;
+package com.daipresents.tsundoku.com.daipresents.tsundoku.bookapi;
 
 import android.app.Activity;
 import android.app.LoaderManager;
@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.daipresents.tsundoku.R;
 
@@ -21,10 +20,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookSearchResultActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<JSONObject>{
+public class BookSearchActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<JSONObject>{
 
-    private static final String TAG = BookSearchResultActivity.class.getSimpleName();
-    Activity activity;
+    private static final String TAG = BookSearchActivity.class.getSimpleName();
+    private Activity activity;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,22 @@ public class BookSearchResultActivity extends AppCompatActivity implements Loade
         setContentView(R.layout.activity_book_search_result);
 
         this.activity = this;
+        this.listView = (ListView) findViewById(R.id.bookSearchResultListView);
+
+
+        this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.v(TAG, "onItemClick: start.");
+
+                Book book = (Book) parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(BookSearchActivity.this, BookDetailActivity.class);
+                intent.putExtra("volumeID", book.getVolumeID());
+                startActivity(intent);
+
+            }
+        });
 
         Intent receivedIntent = getIntent();
         searchBooks(receivedIntent.getStringExtra("keyword"));
@@ -68,12 +84,16 @@ public class BookSearchResultActivity extends AppCompatActivity implements Loade
         }
 
         // convert json to list.
-        List bookList = new ArrayList<BookItem>();
+        List bookList = new ArrayList<Book>();
         try {
             JSONArray items = bookSearchData.getJSONArray("items");
             for (int i = 0; i < items.length(); i++){
                 JSONObject item = (JSONObject) items.get(i);
                 Log.v(TAG, "onLoadFinished: item is " + item.toString());
+
+                // VolumeID
+                String id = item.getString("id");
+                Log.v(TAG, "onLoadFinished: id is " + id);
 
                 JSONObject volumeInfo = (JSONObject) item.getJSONObject("volumeInfo");
                 Log.v(TAG, "onLoadFinished: volumeInfo is " + volumeInfo.toString());
@@ -96,7 +116,7 @@ public class BookSearchResultActivity extends AppCompatActivity implements Loade
                 }
                 Log.v(TAG, "onLoadFinished: author is " + author);
 
-                bookList.add(new BookItem(smallThumbnailURL, title, author));
+                bookList.add(new Book(id, smallThumbnailURL, title, author));
             }
         } catch (JSONException e){
             e.printStackTrace();
@@ -104,15 +124,7 @@ public class BookSearchResultActivity extends AppCompatActivity implements Loade
         }
 
         ListView listView = (ListView) findViewById(R.id.bookSearchResultListView);
-        listView.setAdapter(new BookSearchAdapter(activity, bookList));
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String str = (String) parent.getItemAtPosition(position);
-                Toast.makeText(activity, str, Toast.LENGTH_SHORT).show();
-            }
-        });
+        this.listView.setAdapter(new BookSearchAdapter(activity, bookList));
     }
 
     @Override

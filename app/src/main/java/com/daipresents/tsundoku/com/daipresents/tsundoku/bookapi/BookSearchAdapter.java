@@ -1,8 +1,6 @@
-package com.daipresents.tsundoku.com.daipresents.tsundoku.booksapi;
+package com.daipresents.tsundoku.com.daipresents.tsundoku.bookapi;
 
 import android.content.Context;
-import android.content.Loader;
-import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +17,7 @@ import java.util.List;
  * Created by daipr on 2016/12/07.
  */
 public class BookSearchAdapter
-        extends ArrayAdapter<BookItem> {
+        extends ArrayAdapter<Book> {
 
     private static final String TAG = BookSearchAdapter.class.getSimpleName();
     private Context context;
@@ -31,7 +29,7 @@ public class BookSearchAdapter
         TextView author;
     }
 
-    public BookSearchAdapter(Context context, List<BookItem> bookList) {
+    public BookSearchAdapter(Context context, List<Book> bookList) {
         super(context, 0, bookList);
         this.context = context;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -57,7 +55,7 @@ public class BookSearchAdapter
             view = convertView;
         }
 
-        BookItem item = (BookItem) getItem(position);
+        Book item = (Book) getItem(position);
 
         // Image
         // TODO 仮の画像

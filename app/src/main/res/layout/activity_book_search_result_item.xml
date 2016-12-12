@@ -10,7 +10,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:src="@android:drawable/ic_menu_camera"
+        android:layout_marginRight="5dp" />
 
     <TextView
         android:id="@+id/title"
@@ -19,7 +21,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/smallThumbnail"
-        android:textSize="30dp" />
+        android:textSize="20dp"
+        android:text="book title"
+        android:layout_marginBottom="5dp" />
 
     <TextView
         android:id="@+id/author"
@@ -27,6 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/title"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/title" />
+        android:layout_below="@+id/title"
+        android:text="book author"
+        android:layout_marginBottom="5dp" />
 
 </RelativeLayout>

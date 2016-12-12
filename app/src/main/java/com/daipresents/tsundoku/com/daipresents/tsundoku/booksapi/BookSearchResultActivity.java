@@ -53,7 +53,7 @@ public class BookSearchResultActivity extends AppCompatActivity implements Loade
     public Loader<JSONObject> onCreateLoader(int id, Bundle bundle) {
         Log.v(TAG, "onCreateLoader: start");
 
-        BookSearchAsyncTaskLoader loader = new BookSearchAsyncTaskLoader(activity, bundle.getString("url"));
+        BookSearchAsyncTaskLoader loader = new BookSearchAsyncTaskLoader(activity, bundle.getString("keyword"));
         loader.forceLoad();
         return loader;
     }
@@ -62,7 +62,10 @@ public class BookSearchResultActivity extends AppCompatActivity implements Loade
     public void onLoadFinished(Loader<JSONObject> loader, JSONObject bookSearchData) {
         Log.v(TAG, "onLoadFinished: start");
 
-        Log.v(TAG, "onLoadFinished: JSON data is " + bookSearchData.toString());
+        if (bookSearchData == null) {
+            Log.v(TAG, "onLoadFinished: end because bookSearchData is null.");
+            return;
+        }
 
         // convert json to list.
         List bookList = new ArrayList<BookItem>();

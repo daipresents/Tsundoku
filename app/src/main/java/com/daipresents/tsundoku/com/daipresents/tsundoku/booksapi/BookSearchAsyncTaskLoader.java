@@ -54,9 +54,9 @@ public class BookSearchAsyncTaskLoader extends AsyncTaskLoader<JSONObject> {
             connection.connect();
 
             int status = connection.getResponseCode();
-            if (status == HttpURLConnection.HTTP_OK) {
-                Log.v(TAG, "loadInBackground: HTTP_OK");
+            Log.v(TAG, "loadInBackground: status: " + status);
 
+            if (status == HttpURLConnection.HTTP_OK) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String line = null;
 
@@ -85,6 +85,12 @@ public class BookSearchAsyncTaskLoader extends AsyncTaskLoader<JSONObject> {
             if (connection != null) {
                 connection.disconnect();
             }
+        }
+
+        if (resultJSON == null ){
+            Log.v(TAG, "loadInBackground: JSON data is null.");
+        } else {
+            Log.v(TAG, "loadInBackground: JSON data is " + resultJSON.toString());
         }
 
         return resultJSON;

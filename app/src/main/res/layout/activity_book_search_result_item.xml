@@ -6,7 +6,7 @@
     android:layout_margin="4dp" >
 
     <ImageView
-        android:id="@+id/smallThumbnail"
+        android:id="@+id/searchResultThumbnail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -15,24 +15,65 @@
         android:layout_marginRight="5dp" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/searchResultTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/smallThumbnail"
+        android:layout_toRightOf="@+id/searchResultThumbnail"
         android:textSize="20dp"
         android:text="book title"
         android:layout_marginBottom="5dp" />
 
-    <TextView
-        android:id="@+id/author"
+    <LinearLayout
+        android:id="@+id/searchResultMetaData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/title"
+        android:orientation="horizontal"
+        android:layout_alignLeft="@+id/searchResultTitle"
+        android:layout_below="@+id/searchResultTitle">
+
+        <TextView
+            android:id="@+id/searchResultAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/searchResultTitle"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/searchResultTitle"
+            android:text="book author"
+            android:layout_marginBottom="5dp" />
+
+        <TextView
+        android:id="@+id/searchResultPublisher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/searchResultTitle"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/title"
-        android:text="book author"
+        android:layout_below="@+id/searchResultTitle"
+        android:text="publisher"
+        android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp" />
+
+        <TextView
+            android:id="@+id/searchResultpPublishedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/searchResultTitle"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/searchResultMetaData"
+            android:text="published date"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/searchResultpDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/searchResultTitle"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/searchResultMetaData"
+        android:text="description"
         android:layout_marginBottom="5dp" />
 
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.daipresents.tsundoku.com.daipresents.tsundoku.bookapi;
+package com.daipresents.tsundoku.com.daipresents.tsundoku.book;
 
 import android.content.Context;
 import android.graphics.Bitmap;

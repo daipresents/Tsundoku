@@ -1,4 +1,4 @@
-package com.daipresents.tsundoku.com.daipresents.tsundoku.bookapi;
+package com.daipresents.tsundoku;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
@@ -18,19 +18,18 @@ import java.net.URL;
 /**
  * Created by daipr on 2016/12/04.
  */
-public class BookSearchAsyncTaskLoader extends AsyncTaskLoader<JSONObject> {
+public class JSONAPIAsyncTaskLoader extends AsyncTaskLoader<JSONObject> {
 
-    private static final String TAG = BookSearchAsyncTaskLoader.class.getSimpleName();
-    private static final String GOOGLE_BOOK_API = "https://www.googleapis.com/books/v1/volumes?startIndex=0&q=";
+    private static final String TAG = JSONAPIAsyncTaskLoader.class.getSimpleName();
     private URL url;
 
-    public BookSearchAsyncTaskLoader(Context context, String keyword) {
+    public JSONAPIAsyncTaskLoader(Context context, String url) {
         super(context);
 
-        Log.v(TAG, "BookSearchAsyncTaskLoader: request URL is " + GOOGLE_BOOK_API + keyword);
+        Log.v(TAG, "JSONAPIAsyncTaskLoader: request URL is " + url);
 
         try {
-            this.url = new java.net.URL(GOOGLE_BOOK_API + keyword);
+            this.url = new java.net.URL(url);
         }catch (MalformedURLException e){
             e.printStackTrace();
         }

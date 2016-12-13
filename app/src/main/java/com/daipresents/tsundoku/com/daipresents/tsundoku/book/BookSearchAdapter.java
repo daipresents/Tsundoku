@@ -1,4 +1,4 @@
-package com.daipresents.tsundoku.com.daipresents.tsundoku.bookapi;
+package com.daipresents.tsundoku.com.daipresents.tsundoku.book;
 
 import android.content.Context;
 import android.util.Log;
@@ -24,9 +24,12 @@ public class BookSearchAdapter
     private LayoutInflater layoutInflater;
 
     static class ViewHolder {
-        ImageView smallThumnail;
         TextView title;
         TextView author;
+        TextView publisher;
+        TextView publishedDate;
+        TextView description;
+        ImageView thumbnail;
     }
 
     public BookSearchAdapter(Context context, List<Book> bookList) {
@@ -46,9 +49,12 @@ public class BookSearchAdapter
         if (convertView == null) {
             view = this.layoutInflater.inflate(R.layout.activity_book_search_result_item, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.smallThumnail = (ImageView) view.findViewById(R.id.smallThumbnail);
-            viewHolder.title = (TextView) view.findViewById(R.id.title);
-            viewHolder.author = (TextView) view.findViewById(R.id.author);
+            viewHolder.title = (TextView) view.findViewById(R.id.searchResultTitle);
+            viewHolder.author = (TextView) view.findViewById(R.id.searchResultAuthor);
+            viewHolder.publisher = (TextView) view.findViewById(R.id.searchResultPublisher);
+            viewHolder.publishedDate = (TextView) view.findViewById(R.id.searchResultpPublishedDate);
+            viewHolder.description = (TextView) view.findViewById(R.id.searchResultpDescription);
+            viewHolder.thumbnail = (ImageView) view.findViewById(R.id.searchResultThumbnail);
             view.setTag(viewHolder);
 
         } else {
@@ -56,17 +62,15 @@ public class BookSearchAdapter
         }
 
         Book item = (Book) getItem(position);
-
-        // Image
-        // TODO 仮の画像
-        BookImageAsyncTask bookImageAsyncTask = new BookImageAsyncTask(context, viewHolder.smallThumnail);
-        bookImageAsyncTask.execute(item.getSmallThumbnail());
-
-        // Title
         viewHolder.title.setText(item.getTitle());
-
-        // Author
         viewHolder.author.setText(item.getAuthor());
+        viewHolder.publisher.setText(item.getPublisher());
+        viewHolder.publishedDate.setText(item.getPublishedDate());
+        viewHolder.description.setText((item.getDescription()));
+
+        // TODO 仮の画像
+        BookImageAsyncTask bookImageAsyncTask = new BookImageAsyncTask(context, viewHolder.thumbnail);
+        bookImageAsyncTask.execute(item.getThumbnail());
 
         return view;
     }

@@ -7,6 +7,70 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".com.daipresents.tsundoku.bookapi.BookDetailActivity">
+    tools:context=".com.daipresents.tsundoku.book.BookDetailActivity">
+
+    <ImageView
+        android:id="@+id/detailviewThumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_camera"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/detailviewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="book title"
+        android:layout_below="@+id/detailviewThumbnail"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/detailViewAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="book author"
+        android:layout_below="@+id/detailviewTitle"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/detailViewAuthor"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp">
+        <Button
+            android:id="@+id/detailViewBooklogButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Booklog"
+            android:layout_below="@+id/detailViewAuthor"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/detailviewTitle"
+            />
+
+        <Button
+            android:id="@+id/detailViewCalilButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="カーリル"
+            android:layout_alignTop="@+id/button"
+            android:layout_toRightOf="@+id/button"
+            android:layout_toEndOf="@+id/button"
+            android:layout_gravity="bottom" />
+
+        <Button
+            android:id="@+id/detailViewAmazonButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amazon"
+            android:layout_alignTop="@+id/button2"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="bottom" />
+    </LinearLayout>
 
 </RelativeLayout>

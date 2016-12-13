@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daipresents.tsundoku.com.daipresents.tsundoku.book.BookSearchActivity;
+import com.daipresents.tsundoku.book.BookSearchActivity;
 
 public class MainActivity extends AppCompatActivity {
 

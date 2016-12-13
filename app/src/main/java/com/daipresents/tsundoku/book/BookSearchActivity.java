@@ -1,4 +1,4 @@
-package com.daipresents.tsundoku.com.daipresents.tsundoku.book;
+package com.daipresents.tsundoku.book;
 
 import android.app.Activity;
 import android.app.LoaderManager;
@@ -44,10 +44,10 @@ public class BookSearchActivity extends AppCompatActivity implements LoaderManag
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.v(TAG, "onItemClick: start.");
 
-                Book book = (Book) parent.getItemAtPosition(position);
+                BookParcelable book = (BookParcelable) parent.getItemAtPosition(position);
 
                 Intent intent = new Intent(BookSearchActivity.this, BookDetailActivity.class);
-                intent.putExtra("volumeID", book.getVolumeID());
+                intent.putExtra("book", book);
                 startActivity(intent);
 
             }
@@ -86,11 +86,11 @@ public class BookSearchActivity extends AppCompatActivity implements LoaderManag
         }
 
         // convert json to list. TODO: create JSON to book object converter.
-        List bookList = new ArrayList<Book>();
+        List bookList = new ArrayList<BookParcelable>();
         try {
             JSONArray items = bookSearchData.getJSONArray("items");
             for (int i = 0; i < items.length(); i++){
-                Book book = new Book();
+                BookParcelable book = new BookParcelable();
 
                 JSONObject item = (JSONObject) items.get(i);
                 Log.v(TAG, "onLoadFinished: item is " + item.toString());
@@ -137,8 +137,10 @@ public class BookSearchActivity extends AppCompatActivity implements LoaderManag
                     JSONArray industryIdentifiers = volumeInfo.getJSONArray("industryIdentifiers");
                     for (int j = 0; j < industryIdentifiers.length(); j++){
                         JSONObject isbn = (JSONObject) industryIdentifiers.get(j);
-                        book.setIsbn(isbn.getString("identifier"));
-                        break;
+                        if ("ISBN_10".equals(isbn.getString("type"))) {
+                            book.setIsbn(isbn.getString("identifier"));
+                            break;
+                        }
                     }
                 } catch (JSONException e){
                     Log.v(TAG, "onLoadFinished: no ISBN.");

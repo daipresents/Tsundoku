@@ -7,10 +7,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".com.daipresents.tsundoku.book.BookDetailActivity">
+    tools:context=".book.BookDetailActivity">
 
     <ImageView
-        android:id="@+id/detailviewThumbnail"
+        android:id="@+id/detailThumbnail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_menu_camera"
@@ -18,42 +18,72 @@
         />
 
     <TextView
-        android:id="@+id/detailviewTitle"
+        android:id="@+id/detailTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:text="book title"
-        android:layout_below="@+id/detailviewThumbnail"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/detailViewAuthor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="book author"
-        android:layout_below="@+id/detailviewTitle"
+        android:layout_below="@+id/detailThumbnail"
         android:layout_centerHorizontal="true" />
 
     <LinearLayout
+        android:id="@+id/detailMetaData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detailTitle"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/detailAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="book author"
+            android:layout_below="@+id/detailTitle" />
+
+        <TextView
+            android:id="@+id/detailPublisher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="publisher"
+            android:layout_marginLeft="5dp" />
+
+        <TextView
+            android:id="@+id/detailPublishedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="publisher"
+            android:layout_marginLeft="5dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/detailDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="description"
+        android:layout_below="@+id/detailMetaData"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:id="@+id/detailLinkButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/detailViewAuthor"
+        android:layout_below="@+id/detailDescription"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp">
         <Button
-            android:id="@+id/detailViewBooklogButton"
+            android:id="@+id/detailBooklogButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Booklog"
-            android:layout_below="@+id/detailViewAuthor"
+            android:text="ブクログ"
+            android:layout_below="@+id/detailAuthor"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/detailviewTitle"
+            android:layout_toStartOf="@+id/detailTitle"
             />
 
         <Button
-            android:id="@+id/detailViewCalilButton"
+            android:id="@+id/detailCalilButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="カーリル"
@@ -63,7 +93,7 @@
             android:layout_gravity="bottom" />
 
         <Button
-            android:id="@+id/detailViewAmazonButton"
+            android:id="@+id/detailAmazonButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Amazon"

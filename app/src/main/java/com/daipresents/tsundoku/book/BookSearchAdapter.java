@@ -1,4 +1,4 @@
-package com.daipresents.tsundoku.com.daipresents.tsundoku.book;
+package com.daipresents.tsundoku.book;
 
 import android.content.Context;
 import android.util.Log;
@@ -17,7 +17,7 @@ import java.util.List;
  * Created by daipr on 2016/12/07.
  */
 public class BookSearchAdapter
-        extends ArrayAdapter<Book> {
+        extends ArrayAdapter<BookParcelable> {
 
     private static final String TAG = BookSearchAdapter.class.getSimpleName();
     private Context context;
@@ -32,7 +32,7 @@ public class BookSearchAdapter
         ImageView thumbnail;
     }
 
-    public BookSearchAdapter(Context context, List<Book> bookList) {
+    public BookSearchAdapter(Context context, List<BookParcelable> bookList) {
         super(context, 0, bookList);
         this.context = context;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -61,7 +61,7 @@ public class BookSearchAdapter
             view = convertView;
         }
 
-        Book item = (Book) getItem(position);
+        BookParcelable item = (BookParcelable) getItem(position);
         viewHolder.title.setText(item.getTitle());
         viewHolder.author.setText(item.getAuthor());
         viewHolder.publisher.setText(item.getPublisher());

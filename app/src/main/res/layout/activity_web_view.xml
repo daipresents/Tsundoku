@@ -7,10 +7,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".book.BookSearchActivity">
+    tools:context=".WebViewActivity">
 
-    <ListView
-        android:id="@+id/bookSearchResultListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></WebView>
 </RelativeLayout>

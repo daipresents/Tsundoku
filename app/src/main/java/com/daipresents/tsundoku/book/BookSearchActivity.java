@@ -126,11 +126,16 @@ public class BookSearchActivity extends AppCompatActivity implements LoaderManag
                 }
 
                 // Description
-                try {
-                    book.setDescription(volumeInfo.getString("description"));
-                } catch (JSONException e){
-                    Log.v(TAG, "onLoadFinished: no description.");
-                }
+//                try {
+//                    String description = volumeInfo.getString("description");
+//                    if (description != null && description.length() > 30) {
+//                        description.substring(0, 30);
+//                    }
+//
+//                    book.setDescription(description);
+//                } catch (JSONException e){
+//                    Log.v(TAG, "onLoadFinished: no description.");
+//                }
 
                 //industryIdentifiers => ISBN10
                 try{

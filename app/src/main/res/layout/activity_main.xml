@@ -41,16 +41,16 @@
                 android:src="@android:drawable/ic_menu_search"
                 android:layout_weight="0.10"/>
 
-            <ImageButton
+            <!--<ImageButton
                 android:id="@+id/barcodeSearchButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_menu_camera"
-                android:layout_weight="0.10" />
+                android:layout_weight="0.10" />-->
 
         </LinearLayout>
 
-        <LinearLayout
+        <!--<LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,6 +80,6 @@
                 android:layout_weight="0.23"
                 android:src="@android:drawable/ic_menu_manage"/>
 
-        </LinearLayout>
+        </LinearLayout>-->
     </LinearLayout>
 </RelativeLayout>

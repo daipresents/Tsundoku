@@ -9,8 +9,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".book.BookSearchActivity">
 
+    <include
+        android:id="@+id/toolbarPlace"
+        layout="@layout/activity_toolbar"/>
+
     <ListView
         android:id="@+id/bookSearchResultListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbarPlace"></ListView>
 </RelativeLayout>

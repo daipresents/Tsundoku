@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.daipresents.tsundoku.JSONAPIAsyncTaskLoader;
+import com.daipresents.tsundoku.MainActivity;
 import com.daipresents.tsundoku.R;
 
 import org.json.JSONArray;
@@ -38,6 +40,17 @@ public class BookSearchActivity extends AppCompatActivity implements LoaderManag
         this.activity = this;
         this.listView = (ListView) findViewById(R.id.bookSearchResultListView);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BookSearchActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

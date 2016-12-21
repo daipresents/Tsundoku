@@ -43,22 +43,21 @@ public class BookSearchAdapter
 
         Log.v(TAG, "getView: start");
 
-        View view = null;
         ViewHolder viewHolder = null;
 
         if (convertView == null) {
-            view = this.layoutInflater.inflate(R.layout.activity_book_search_result_item, parent, false);
+            convertView = this.layoutInflater.inflate(R.layout.activity_book_search_result_item, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.title = (TextView) view.findViewById(R.id.searchResultTitle);
-            viewHolder.author = (TextView) view.findViewById(R.id.searchResultAuthor);
-            viewHolder.publisher = (TextView) view.findViewById(R.id.searchResultPublisher);
-            viewHolder.publishedDate = (TextView) view.findViewById(R.id.searchResultpPublishedDate);
-            viewHolder.description = (TextView) view.findViewById(R.id.searchResultpDescription);
-            viewHolder.thumbnail = (ImageView) view.findViewById(R.id.searchResultThumbnail);
-            view.setTag(viewHolder);
+            viewHolder.title = (TextView) convertView.findViewById(R.id.searchResultTitle);
+            viewHolder.author = (TextView) convertView.findViewById(R.id.searchResultAuthor);
+            viewHolder.publisher = (TextView) convertView.findViewById(R.id.searchResultPublisher);
+            viewHolder.publishedDate = (TextView) convertView.findViewById(R.id.searchResultpPublishedDate);
+            viewHolder.description = (TextView) convertView.findViewById(R.id.searchResultpDescription);
+            viewHolder.thumbnail = (ImageView) convertView.findViewById(R.id.searchResultThumbnail);
+            convertView.setTag(viewHolder);
 
         } else {
-            view = convertView;
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
         BookParcelable item = (BookParcelable) getItem(position);
@@ -72,7 +71,7 @@ public class BookSearchAdapter
         BookImageAsyncTask bookImageAsyncTask = new BookImageAsyncTask(context, viewHolder.thumbnail);
         bookImageAsyncTask.execute(item.getThumbnail());
 
-        return view;
+        return convertView;
     }
 
 }

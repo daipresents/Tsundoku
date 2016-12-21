@@ -15,6 +15,7 @@
         layout="@layout/activity_toolbar"/>
 
     <LinearLayout
+        android:id="@+id/searchArea"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -48,4 +49,18 @@
             android:layout_weight="0.10" />-->
 
     </LinearLayout>
+
+    <!--<TextView
+        android:id="@+id/myTsundokuLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="あなたのツンドク"
+        android:layout_below="@+id/searchArea"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>-->
+
+    <!--<ListView
+        android:id="@+id/myTsundokuListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></ListView>-->
 </RelativeLayout>

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.daipresents.tsundoku.JSONAPIAsyncTaskLoader;
 import com.daipresents.tsundoku.MainActivity;
@@ -26,7 +27,7 @@ import java.util.List;
 public class BookSearchActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<JSONObject>{
 
     private static final String TAG = BookSearchActivity.class.getSimpleName();
-    private static final String GOOGLE_BOOK_SEARCH_API = "https://www.googleapis.com/books/v1/volumes?startIndex=0&q=";
+    private static final String GOOGLE_BOOK_SEARCH_API = "https://www.googleapis.com/books/v1/volumes?startIndex=0&maxResults=40&q=";
     private Activity activity;
     private ListView listView;
 
@@ -94,7 +95,8 @@ public class BookSearchActivity extends AppCompatActivity implements LoaderManag
         Log.v(TAG, "onLoadFinished: start");
 
         if (bookSearchData == null) {
-            Log.v(TAG, "onLoadFinished: end because bookSearchData is null.");
+            Log.v(TAG, "onLoadFinished: No result. bookSearchData is null.");
+            Toast.makeText(BookSearchActivity.this, "No result.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -119,9 +121,13 @@ public class BookSearchActivity extends AppCompatActivity implements LoaderManag
 
                 // Author
                 // TODO now only one author.
-                JSONArray authors = volumeInfo.getJSONArray("authors");
-                if (authors != null || authors.length() != 0) {
-                   book.setAuthor(authors.get(0).toString());
+                try {
+                    JSONArray authors = volumeInfo.getJSONArray("authors");
+                    if (authors != null || authors.length() != 0) {
+                        book.setAuthor(authors.get(0).toString());
+                    }
+                }catch (JSONException e){
+                    Log.v(TAG, "onLoadFinished: no author.");
                 }
 
                 // Publisher
@@ -165,9 +171,13 @@ public class BookSearchActivity extends AppCompatActivity implements LoaderManag
                 }
 
                 // Thumbnail
-                JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
-                book.setThumbnail(imageLinks.getString("smallThumbnail"));
-                Log.v(TAG, "onLoadFinished: thumbnail is " + book.getDescription());
+                try{
+                    JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
+                    book.setThumbnail(imageLinks.getString("smallThumbnail"));
+                    Log.v(TAG, "onLoadFinished: thumbnail is " + book.getDescription());
+                }catch(JSONException e){
+                    Log.v(TAG, "onLoadFinished: no imageLinks.");
+                }
 
                 bookList.add(book);
             }

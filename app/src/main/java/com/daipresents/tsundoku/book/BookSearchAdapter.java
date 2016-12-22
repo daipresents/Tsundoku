@@ -68,8 +68,11 @@ public class BookSearchAdapter
         viewHolder.description.setText((item.getDescription()));
 
         // TODO 仮の画像
-        BookImageAsyncTask bookImageAsyncTask = new BookImageAsyncTask(context, viewHolder.thumbnail);
-        bookImageAsyncTask.execute(item.getThumbnail());
+        if (item.getThumbnail() != null) {
+            Log.v(TAG, "getView: bookImageAsyncTask start.");
+            BookImageAsyncTask bookImageAsyncTask = new BookImageAsyncTask(context, viewHolder.thumbnail);
+            bookImageAsyncTask.execute(item.getThumbnail());
+        }
 
         return convertView;
     }

@@ -18,8 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".book.BookSearchActivity" />
-        <activity android:name=".book.BookDetailActivity" />
+        <activity android:name=".books.BookSearchActivity" />
+        <activity android:name=".books.BookDetailActivity" />
         <activity android:name=".WebViewActivity"></activity>
     </application>
 

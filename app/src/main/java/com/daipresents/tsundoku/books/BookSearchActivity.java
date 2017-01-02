@@ -1,4 +1,4 @@
-package com.daipresents.tsundoku.book;
+package com.daipresents.tsundoku.books;
 
 import android.app.Activity;
 import android.app.LoaderManager;
@@ -27,7 +27,7 @@ import java.util.List;
 public class BookSearchActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<JSONObject>{
 
     private static final String TAG = BookSearchActivity.class.getSimpleName();
-    private static final String GOOGLE_BOOK_SEARCH_API = "https://www.googleapis.com/books/v1/volumes?startIndex=0&maxResults=40&q=";
+    private static final String GOOGLE_BOOK_SEARCH_API = "https://www.googleapis.com/books/v1/volumes?startIndex=0&maxResults=40&country=JP&printType=books&projection=lite&q=";
     private Activity activity;
     private ListView listView;
 

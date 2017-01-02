@@ -1,4 +1,4 @@
-package com.daipresents.tsundoku.book;
+package com.daipresents.tsundoku.books;
 
 import android.os.Parcel;
 import android.os.Parcelable;

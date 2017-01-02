@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daipresents.tsundoku.book.BookSearchActivity;
+import com.daipresents.tsundoku.books.BookSearchActivity;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

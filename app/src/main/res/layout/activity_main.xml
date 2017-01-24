@@ -32,6 +32,7 @@
             android:text=""
             android:hint="何さがす？"
             android:textSize="25dp"
+            android:inputType="text"
             android:layout_weight="0.80" />
 
         <ImageButton
